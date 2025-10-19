@@ -51,8 +51,8 @@ public:
 
     void print() const {
         cout << signalType << " "
-             << maxFreq << "Hz "
-             << (hasModulation ? "with modulation" : "no modulation") << "\n";
+            << maxFreq << "Hz "
+            << (hasModulation ? "with modulation" : "no modulation") << "\n";
     }
 
     bool matchType(const string& type) const {
@@ -111,9 +111,12 @@ int main() {
     bool mod;
 
     cout << "Enter signal type: ";
-    cin >> type;
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    getline(cin, type); 
+
     cout << "Enter max frequency (Hz): ";
     cin >> freq;
+
     cout << "Has modulation? (y/n): ";
     cin >> modChar;
     mod = (modChar == 'y' || modChar == 'Y');
@@ -121,6 +124,7 @@ int main() {
     SignalGenerator userGen(type, freq, mod);
     cout << "Created generator: ";
     userGen.print();
+
 
     return 0;
 }
